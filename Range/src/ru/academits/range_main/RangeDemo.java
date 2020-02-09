@@ -1,4 +1,8 @@
-public class RangeClassDemo {
+package ru.academits.range_main;
+
+import ru.academits.range.Range;
+
+public class RangeDemo {
     public static void main(String[] args) {
         Range range = new Range(2, 15);
 
@@ -24,7 +28,7 @@ public class RangeClassDemo {
     }
 }
 
-//    Создать свой класс Range (числовой диапазон). В нём:
+//    Создать свой класс ru.academits.range.Range (числовой диапазон). В нём:
 //        1. Объявить два вещественных поля from, to
 //        2. Описать конструктор, при помощи которого
 //        заполняются поля from, to
