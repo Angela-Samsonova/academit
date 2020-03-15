@@ -80,10 +80,8 @@ public class Range {
         if (this.getIntersection(range) == null || (range.from < this.from && range.to > this.to)) {
             return null;
         } else if ((this.isInside(range.from) && range.from > this.from) && (this.isInside(range.to) && range.to < this.to)) {
-            Range firstSegment = new Range(this.from, range.from);
-            Range secondSegment = new Range(range.to, this.to);
-            complement[0] = firstSegment;
-            complement[1] = secondSegment;
+            complement[0] = new Range(this.from, range.from);
+            complement[1] = new Range(range.to, this.to);
             return complement;
         } else if (range.from <= this.from && this.isInside(range.to)) {
             complement[0] = new Range(range.to, this.to);
