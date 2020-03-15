@@ -25,17 +25,48 @@ public class RangeDemo {
         System.out.println("End point is " + range.getTo());
         System.out.println("Length of the given range is " + range.getLength());
         System.out.println("Number " + number + " is inside the given range - " + range.isInside(number));
+
+        System.out.println();
+
+        Range initialRange = new Range(2.0, 10.0);
+        Range firstRange = new Range(3.0, 10.0);
+        Range secondRange = new Range(4.0, 11.0);
+        Range thirdRange = new Range(1.0, 8.0);
+        Range fourthRange = new Range(1.0, 11.0);
+        Range fifthRange = new Range(11.0, 13.0);
+
+        Range[] ranges = {firstRange, secondRange, thirdRange, fourthRange, fifthRange};
+
+        for (Range e : ranges) {
+            System.out.println("Для " + initialRange.toString() + " и " + e.toString() + ":");
+
+            if (initialRange.getIntersection(e) != null) {
+                System.out.println("- пересечение: " + initialRange.getIntersection(e).toString());
+            } else {
+                System.out.println("- нет пересечения");
+            }
+
+            if (initialRange.getUnion(e)[1] != null) {
+                System.out.println("- объединение: " + initialRange.getUnion(e)[0].toString() + ", " + initialRange.getUnion(e)[1].toString());
+            } else {
+                System.out.println("- объединение: " + initialRange.getUnion(e)[0].toString());
+            }
+
+            if (initialRange.getComplement(e) != null) {
+                if (initialRange.getComplement(e)[1] != null) {
+                    System.out.println("- разность: " + initialRange.getComplement(e)[0].toString() + ", " + initialRange.getComplement(e)[1].toString());
+                } else {
+                    System.out.println("- разность: " + initialRange.getComplement(e)[0].toString());
+                }
+            } else {
+                System.out.println("- нет разности");
+            }
+
+            System.out.println();
+        }
+
     }
 }
 
-//    Создать свой класс ru.academits.range.Range (числовой диапазон). В нём:
-//        1. Объявить два вещественных поля from, to
-//        2. Описать конструктор, при помощи которого
-//        заполняются поля from, to
-//        3. Геттеры и сеттеры для полей
-//        4. Функция для получения длины
-//        5. Создать метод isInside, который принимает
-//        вещественное число и возвращает boolean – результат
-//        проверки того, принадлежит ли число диапазону
-//        • После этого написать небольшую программу с
-//        использованием этого класса
+
+
