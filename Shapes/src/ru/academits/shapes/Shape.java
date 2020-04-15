@@ -1,9 +1,13 @@
 package ru.academits.shapes;
 
 public interface Shape {
-    //        doublegetWidth()
-//        doublegetHeight()
-//        doublegetArea()
-//        double getPerimeter()
+    double ZERO = 0.0;
 
+    double getWidth();
+
+    double getHeight();
+
+    double getArea();
+
+    double getPerimeter();
 }
