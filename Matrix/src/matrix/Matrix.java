@@ -1,24 +1,36 @@
 package matrix;
 
+import vector.Vector;
+
 public class Matrix {
-    private int m;
-    private int n;
-    private double[][] matrixArray;
+    private int m; // number of columns, vector size
+    private int n; //number of rows, vectorsArray size
+   // private double[][] matrixArray;
+    private Vector[] vectorsArray;
 
     public Matrix(int m, int n) {
         this.m = m;
         this.n = n;
-        matrixArray = new double[m][n];
+        vectorsArray = new Vector[n];
+
+        for (int i = 0; i < n; i++) {
+            vectorsArray[i] = new Vector(m);
+        }
     }
 
-    public Matrix (Matrix matrix){
-        this(matrix.m, matrix.n, matrix.matrixArray);
+    public Matrix(Matrix matrix) {
+        this(matrix.m, matrix.n);
+        this.vectorsArray = matrix.vectorsArray;
     }
 
     public Matrix(double[][] matrixArray) {
-        this.m = matrixArray[0].length; // number of columns
-        this.n = matrixArray.length; //number of rows
+        this.m = matrixArray[0].length; // number of columns, vector size
+        this.n = matrixArray.length; //number of rows, vectorsArray size
         this.matrixArray = matrixArray;
+    }
+
+    public Matrix(Vector[] vector) {
+
     }
 
     // Return column length
@@ -31,7 +43,7 @@ public class Matrix {
         return n;
     }
 
-    public double get(int i,int j) {
+    public double get(int i, int j) {
         return matrixArray[i][j];
     }
 
@@ -56,6 +68,7 @@ public class Matrix {
         }
         return new Matrix(newMatrix);
     }
+
     // печать в консоль
     private void print() {
         for (int i = 0; i < m; i++) {
@@ -73,7 +86,7 @@ public class Matrix {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < k; j++) {
                 int temp = 0;
-                for(int l = 0; l < n; l++) {
+                for (int l = 0; l < n; l++) {
                     temp += matrixArray[i][l] * secondMatrix.get(l, j);
                 }
                 newMatrix[i][j] = temp;
@@ -131,22 +144,22 @@ public class Matrix {
             for (int j = 0; j < m; j++) {
                 double[][] b = getMinore(m, 0, j, a);
 
-                if (j%2 == 0) {
-                    temp += a[0][j] * determinant(m-1, b);
+                if (j % 2 == 0) {
+                    temp += a[0][j] * determinant(m - 1, b);
                 } else {
-                    temp -= a[0][j] * determinant(m-1, b);
+                    temp -= a[0][j] * determinant(m - 1, b);
                 }
             }
             return temp;
-        } else if (m == 2){
-            return a[0][0]*a[1][1] - a[0][1]*a[1][0];
+        } else if (m == 2) {
+            return a[0][0] * a[1][1] - a[0][1] * a[1][0];
         } else {
             return a[0][0];
         }
     }
 
     private double[][] getMinore(int m, int i, int j, double[][] a) {
-        double[][] b = new double[m-1][m-1];
+        double[][] b = new double[m - 1][m - 1];
         int rowIndex = 0;
         for (int t = 0; t < m; t++) {
             if (t != i) {
@@ -179,24 +192,23 @@ public class Matrix {
                 // матрица алгабраических дополнений
                 for (int i = 0; i < m; i++) {
                     for (int j = 0; j < m; j++) {
-                        if (i%2 + j%2 == 1) {
+                        if (i % 2 + j % 2 == 1) {
                             minorMatrix[i][j] = -minorMatrix[i][j];
                         }
                     }
                 }
                 // транспортированная матрица алгебраических дополнений
 
-                return (new Matrix(minorMatrix).transpose()).mult((1/det));
+                return (new Matrix(minorMatrix).transpose()).mult((1 / det));
             }
         }
         System.out.println("Impossible to create an inverse matrix.");
         return null;
     }
-//    Реализовать класс матрицы Matrixс использованием класса Vector–хранить строки как массив векторов.
+
 //    Во всех методах, кроме конструкторов, если размеры входных данных неверные, то кидать исключение.
-//    В конструкторах постараться добить данные нулями до максимальной длины.
-//            Реализовать:
-//            1.	Конструкторы:
+
+
 //            a.	Matrix(n, m) – матрица нулей размера nxm
 //b.	Matrix(Matrix) – конструктор копирования
 //c.	Matrix(double[][]) – из двумерного массива (в C#double[,])

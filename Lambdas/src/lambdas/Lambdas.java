@@ -1,4 +1,4 @@
-package ru.academits.lambdas;
+package lambdas;
 
 public class Lambdas {
     
