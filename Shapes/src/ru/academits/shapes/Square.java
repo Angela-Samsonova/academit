@@ -1,28 +1,29 @@
 package ru.academits.shapes;
 
-import java.util.Objects;
-
 public class Square implements Shape {
     private static final int SIDES_COUNT = 4;
-
-    protected double side1;
+    private double side1;
 
     public Square(double side1) {
         this.side1 = side1;
     }
 
+    @Override
     public double getWidth() {
         return side1;
     }
 
+    @Override
     public double getHeight() {
         return side1;
     }
 
+    @Override
     public double getArea() {
         return Math.pow(side1, 2.0);
     }
 
+    @Override
     public double getPerimeter() {
         return SIDES_COUNT * side1;
     }
@@ -39,7 +40,7 @@ public class Square implements Shape {
             return true;
         }
 
-        if (o == null || this.getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 

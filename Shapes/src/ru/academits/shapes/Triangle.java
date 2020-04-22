@@ -1,6 +1,6 @@
 package ru.academits.shapes;
 
-public class Triangle implements Shape{
+public class Triangle implements Shape {
     private double x1;
     private double x2;
     private double x3;
@@ -18,47 +18,49 @@ public class Triangle implements Shape{
     }
 
     private static double getMaxNumber(double a1, double a2, double a3) {
-        double[] array = new double[]{a1, a2, a3};
-        double maxNumber = array[0];
-
-        for (double e : array) {
-            if (e > maxNumber) {
-                maxNumber = e;
-            }
+        if (a2 <= a1 && a3 <= a1) {
+            return a1;
+        } else if (a1 <= a2 && a3 <= a2) {
+            return a2;
+        } else {
+            return a3;
         }
-
-        return maxNumber;
     }
 
     private static double getMinNumber(double a1, double a2, double a3) {
-        double[] array = new double[]{a1, a2, a3};
-        double minNumber = array[0];
-
-        for (double e : array) {
-            if (e < minNumber) {
-                minNumber = e;
-            }
+        if (a1 <= a2 && a1 <= a3) {
+            return a1;
+        } else if (a2 <= a1 && a2 <= a3) {
+            return a2;
+        } else {
+            return a3;
         }
-
-        return minNumber;
     }
 
+    private static double getSide(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow((x2 - x1), 2.0) + Math.pow((y2 - y1), 2));
+    }
+
+    @Override
     public double getWidth() {
         return getMaxNumber(x1, x2, x3) - getMinNumber(x1, x2, x3);
     }
 
+    @Override
     public double getHeight() {
         return getMaxNumber(y1, y2, y3) - getMinNumber(y1, y2, y3);
     }
 
+    @Override
     public double getArea() {
         return 0.5 * Math.abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1));
     }
 
+    @Override
     public double getPerimeter() {
-        double side1 = Math.sqrt(Math.pow((x2 - x1), 2.0) + Math.pow((y2 - y1), 2));
-        double side2 = Math.sqrt(Math.pow((x3 - x2), 2.0) + Math.pow((y3 - y2), 2));
-        double side3 = Math.sqrt(Math.pow((x3 - x1), 2.0) + Math.pow((y3 - y1), 2));
+        double side1 = getSide(x1, y1, x2, y2);
+        double side2 = getSide(x2, y2, x3, y3);
+        double side3 = getSide(x1, y1, x3, y3);
 
         return side1 + side2 + side3;
     }
@@ -76,7 +78,7 @@ public class Triangle implements Shape{
             return true;
         }
 
-        if (o == null || this.getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 

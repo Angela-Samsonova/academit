@@ -3,7 +3,6 @@ package ru.academits.shapes_main;
 import ru.academits.shapes.*;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class ShapesDemo {
     public static void main(String[] args) {
@@ -16,21 +15,9 @@ public class ShapesDemo {
         shapes[5] = new Square(5.5);
         shapes[6] = new Circle(5.5);
 
-        System.out.println("The shape with the largest area is " +  getLargestShape(shapes).toString());
+        System.out.println("The shape with the largest area is " + getLargestShape(shapes).toString());
 
         System.out.println("The shape with the second longest perimeter is " + getShapeWithSecondLongestPerimeter(shapes).toString());
-    }
-
-    static class SortByArea implements Comparator<Shape> {
-        public int compare(Shape a, Shape b) {
-            return Double.compare(a.getArea(), b.getArea());
-        }
-    }
-
-    static class SortByPerimeter implements Comparator<Shape> {
-        public int compare(Shape a, Shape b) {
-            return Double.compare(a.getPerimeter(), b.getPerimeter());
-        }
     }
 
     public static Shape getLargestShape(Shape[] shapes) {

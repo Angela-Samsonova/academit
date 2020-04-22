@@ -1,13 +1,15 @@
 package ru.academits.shapes;
 
-public class Rectangle extends Square {
+public class Rectangle implements Shape {
+    private double side1;
     private double side2;
 
     public Rectangle(double side1, double side2) {
-        super(side1);
+        this.side1 = side1;
         this.side2 = side2;
     }
 
+    @Override
     public double getHeight() {
         return side1;
     }
@@ -39,7 +41,7 @@ public class Rectangle extends Square {
             return true;
         }
 
-        if (o == null || this.getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
