@@ -20,7 +20,7 @@ public class MyListDemo {
         System.out.println("actual size = " + integersList2.getSize() + " " + Arrays.toString(integersList2.toArray()));
         integersList2.insertAsFirstItem(new ListItem<>(6));
         integersList2.insertAsFirstItem(new ListItem<>(8));
-        integersList2.insertAsFirstItem(new ListItem<>(8));
+        integersList2.insertAsFirstItem(new ListItem<>(null));
         integersList2.setCount(7);
         integersList2.insertAsFirstItem(new ListItem<>(5));
 
