@@ -8,11 +8,6 @@ public class ListItem<E> {
         this.data = data;
     }
 
-    public ListItem(E data, ListItem<E> next) {
-        this.data = data;
-        this.next = next;
-    }
-
     public E getData() {
         return data;
     }
@@ -27,5 +22,10 @@ public class ListItem<E> {
 
     public void setNext(ListItem<E> next) {
         this.next = next;
+    }
+
+    @Override
+    public String toString() {
+        return data.toString();
     }
 }
