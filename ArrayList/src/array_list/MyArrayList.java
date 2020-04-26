@@ -227,7 +227,7 @@ public class MyArrayList<E> implements List<E> {
         @Override
         public E next() {
             ++currentIndex;
-            return items[currentIndex]
+            return items[currentIndex];
         }
     }
 }

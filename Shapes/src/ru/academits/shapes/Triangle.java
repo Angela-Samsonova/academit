@@ -18,23 +18,11 @@ public class Triangle implements Shape {
     }
 
     private static double getMaxNumber(double a1, double a2, double a3) {
-        if (a2 <= a1 && a3 <= a1) {
-            return a1;
-        } else if (a1 <= a2 && a3 <= a2) {
-            return a2;
-        } else {
-            return a3;
-        }
+        return Math.max(Math.max(a1, a2), a3);
     }
 
     private static double getMinNumber(double a1, double a2, double a3) {
-        if (a1 <= a2 && a1 <= a3) {
-            return a1;
-        } else if (a2 <= a1 && a2 <= a3) {
-            return a2;
-        } else {
-            return a3;
-        }
+        return Math.min(Math.min(a1, a2), a3);
     }
 
     private static double getSide(double x1, double y1, double x2, double y2) {
