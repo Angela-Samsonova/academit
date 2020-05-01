@@ -64,6 +64,20 @@ public class Extra {
         }
     }
 
+//удаление четных чисел из списка
+public static void removeEvenNumbers(ArrayList<Integer> list) {
+    if (list == null) {
+        throw new IllegalArgumentException("list must be not null");
+    }
 
+    for (int i = 0; i < list.size(); i++) {
+        if (list.get(i) % 2 == 0) {
+            list.remove(list.get(i));
+            i--;
+        }
+    }
+
+    System.out.println("Список после удаления четных чисел = " + list + System.lineSeparator());
+}
 
 }

@@ -72,9 +72,9 @@ public class Triangle implements Shape {
 
         Triangle triangle = (Triangle) o;
 
-        return Double.compare(triangle.x1, x1) == 0 && Double.compare(triangle.x2, x2) == 0 &&
-                Double.compare(triangle.x3, x3) == 0 && Double.compare(triangle.y1, y1) == 0 &&
-                Double.compare(triangle.y2, y2) == 0 && Double.compare(triangle.y3, y3) == 0;
+        return triangle.x1 == x1 && triangle.x2 == x2 &&
+                triangle.x3 == x3 && triangle.y1 == y1 &&
+                triangle.y2 == y2 && triangle.y3 == y3;
     }
 
     @Override

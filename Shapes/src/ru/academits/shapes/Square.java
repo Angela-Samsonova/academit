@@ -2,35 +2,35 @@ package ru.academits.shapes;
 
 public class Square implements Shape {
     private static final int SIDES_COUNT = 4;
-    private double side1;
+    private double side;
 
-    public Square(double side1) {
-        this.side1 = side1;
+    public Square(double side) {
+        this.side = side;
     }
 
     @Override
     public double getWidth() {
-        return side1;
+        return side;
     }
 
     @Override
     public double getHeight() {
-        return side1;
+        return side;
     }
 
     @Override
     public double getArea() {
-        return Math.pow(side1, 2.0);
+        return Math.pow(side, 2.0);
     }
 
     @Override
     public double getPerimeter() {
-        return SIDES_COUNT * side1;
+        return SIDES_COUNT * side;
     }
 
     @Override
     public String toString() {
-        return "Square: width = height = " + side1 + ", area = " + getArea() + ", perimeter = "
+        return "Square: width = height = " + side + ", area = " + getArea() + ", perimeter = "
                 + getPerimeter();
     }
 
@@ -46,14 +46,14 @@ public class Square implements Shape {
 
         Square square = (Square) o;
 
-        return side1 == square.side1;
+        return side == square.side;
     }
 
     @Override
     public int hashCode() {
         final int prime = 37;
         int hash = 1;
-        hash = prime * hash + Double.hashCode(side1);
+        hash = prime * hash + Double.hashCode(side);
         return hash;
     }
 }
