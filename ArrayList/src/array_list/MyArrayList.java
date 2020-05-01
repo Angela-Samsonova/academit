@@ -6,12 +6,13 @@ public class MyArrayList<E> implements List<E> {
     private E[] items;
     private int capacity;
     private int length;
+    private int modCount;
 
     public MyArrayList(int capacity) {
         this.capacity = capacity;
         //noinspection unchecked
         this.items = (E[]) new Object[capacity];
-        this.length = 0;
+        length = 0;
     }
 
     public MyArrayList(MyArrayList<E> myArrayList) {
@@ -19,15 +20,16 @@ public class MyArrayList<E> implements List<E> {
             throw new IllegalArgumentException("myArrayList must be not null");
         }
 
-        this.items = myArrayList.items;
-        this.capacity = myArrayList.capacity;
-        this.length = myArrayList.length;
+        items = myArrayList.items;
+        capacity = myArrayList.capacity;
+        length = myArrayList.length;
+        modCount = myArrayList.modCount;
     }
 
     public MyArrayList(E[] objects) {
-        this.items = objects;
-        this.capacity = objects.length;
-        this.length = objects.length;
+        items = objects;
+        capacity = objects.length;
+        length = objects.length;
     }
 
     public MyArrayList(E[] objects, int length) {
@@ -80,7 +82,7 @@ public class MyArrayList<E> implements List<E> {
         if (length >= items.length) {
             increaseCapacity();
         }
-        items[length] = o;
+        items[length] = (E) o;
         ++length;
     }
 
@@ -112,7 +114,7 @@ public class MyArrayList<E> implements List<E> {
 
     //TODO
     @Override
-    public Object get(int i) {
+    public E get(int i) {
         //TODO бросить исключение если выход за length
         return this.items[i];
     }
@@ -121,7 +123,7 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public Object set(int i, Object o) {
         //TODO бросить исключение если выход за length
-        items[i] = o;
+        items[i] = (E) o;
     }
 
     //TODO
@@ -132,13 +134,14 @@ public class MyArrayList<E> implements List<E> {
 
     //TODO
     @Override
-    public Object remove(int i) {
+    public E remove(int i) {
         // TODO выход за границы
         if (i < length - 1) {
             System.arraycopy(items, i + 1,
                     items, i, length - i - 1);
         }
         --length;
+        return null;
     }
 
     //TODO
@@ -153,17 +156,21 @@ public class MyArrayList<E> implements List<E> {
         return 0;
     }
 
+    //не надо
     @Override
     public ListIterator<E> listIterator() {
         //noinspection unchecked,ConstantConditions
         return (ListIterator<E>) new MyListIterator();
     }
 
+    //не надо
     @Override
     public ListIterator<E> listIterator(int i) {
-        return new MyListIterator();;
+        //noinspection unchecked,ConstantConditions
+        return (ListIterator<E>) new MyListIterator();
     }
 
+    //не надо
     @Override
     public List<E> subList(int i, int i1) {
         return null;
@@ -193,7 +200,7 @@ public class MyArrayList<E> implements List<E> {
         System.arraycopy(items, 0, objects, 0, length);
 
         return objects;
-        return new Object[0];
+        // return new Object[0];
     }
 
     private void increaseCapacity() {
@@ -218,6 +225,7 @@ public class MyArrayList<E> implements List<E> {
 
     private class MyListIterator implements Iterator<E> {
         private int currentIndex = -1;
+        private int currentModCount = modCount;
 
         @Override
         public boolean hasNext() {
@@ -226,6 +234,15 @@ public class MyArrayList<E> implements List<E> {
 
         @Override
         public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("no next element");
+            }
+
+
+            if (currentModCount != modCount) {
+                throw new ConcurrentModificationException ("number of items has changed");
+            }
+
             ++currentIndex;
             return items[currentIndex];
         }
