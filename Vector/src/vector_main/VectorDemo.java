@@ -26,7 +26,7 @@ public class VectorDemo {
         Vector vector11 = new Vector(array4);
         vector11.subtract(vector2);
         Vector vector12 = new Vector(array4);
-        vector12.add(vector2);
+        vector12.add(vector4);
         Vector vector13 = new Vector(array1);
         vector13.getLength();
         Vector vector14 = new Vector(array1);

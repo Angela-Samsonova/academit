@@ -39,10 +39,6 @@ public class Vector {
         elements[index] = newValue;
     }
 
-    public int getSize() {
-        return elements.length;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
@@ -83,17 +79,14 @@ public class Vector {
             throw new IllegalArgumentException("vector must be not null");
         }
 
-        if (getSize() > vector.getSize()) {
-            double[] extendedArray = Arrays.copyOf(vector.elements, getSize());
-            vector = new Vector(extendedArray);
-
-            for (int i = 0; i < getSize(); i++) {
-                elements[i] += vector.elements[i];
-            }
-        } else {
-            elements = Arrays.copyOf(elements, vector.getSize());
-
-            for (int i = 0; i < vector.getSize(); i++) {
+        for (int i = 0; i < elements.length; i++) {
+            if (elements.length >= vector.elements.length) {
+                while (i < vector.elements.length) {
+                    elements[i] += vector.elements[i];
+                    i++;
+                }
+            } else {
+                elements = Arrays.copyOf(elements, vector.elements.length);
                 elements[i] += vector.elements[i];
             }
         }
@@ -104,17 +97,14 @@ public class Vector {
             throw new IllegalArgumentException("vector must be not null");
         }
 
-        if (getSize() > vector.getSize()) {
-            double[] extendedArray = Arrays.copyOf(vector.elements, getSize());
-            vector = new Vector(extendedArray);
-
-            for (int i = 0; i < getSize(); i++) {
-                elements[i] -= vector.elements[i];
-            }
-        } else {
-            elements = Arrays.copyOf(elements, vector.getSize());
-
-            for (int i = 0; i < vector.getSize(); i++) {
+        for (int i = 0; i < elements.length; i++) {
+            if (elements.length >= vector.elements.length) {
+                while (i < vector.elements.length) {
+                    elements[i] -= vector.elements[i];
+                    i++;
+                }
+            } else {
+                elements = Arrays.copyOf(elements, vector.elements.length);
                 elements[i] -= vector.elements[i];
             }
         }
@@ -141,52 +131,59 @@ public class Vector {
     }
 
     public static Vector add(Vector vector1, Vector vector2) {
-        if (vector1 == null || vector2 == null) {
-            throw new IllegalArgumentException("vector must be not null");
+        if (vector1 == null) {
+            throw new IllegalArgumentException("vector1 must be not null");
         }
 
-        Vector newvector = new Vector(vector1);
-        newvector.add(vector2);
+        if (vector2 == null) {
+            throw new IllegalArgumentException("vector2 must be not null");
+        }
 
-        return newvector;
+        Vector newVector = new Vector(vector1);
+        newVector.add(vector2);
+
+        return newVector;
     }
 
     public static Vector subtract(Vector vector1, Vector vector2) {
-        if (vector1 == null || vector2 == null) {
-            throw new IllegalArgumentException("vector must be not null");
+        if (vector1 == null) {
+            throw new IllegalArgumentException("vector1 must be not null");
         }
 
-        Vector newvector = new Vector(vector1);
-        newvector.subtract(vector2);
+        if (vector2 == null) {
+            throw new IllegalArgumentException("vector2 must be not null");
+        }
 
-        return newvector;
+        Vector newVector = new Vector(vector1);
+        newVector.subtract(vector2);
+
+        return newVector;
     }
 
     public static double getScalarProduct(Vector vector1, Vector vector2) {
-        if (vector1 == null || vector2 == null) {
-            throw new IllegalArgumentException("vector must be not null");
+        if (vector1 == null) {
+            throw new IllegalArgumentException("vector1 must be not null");
         }
 
-        double sum = 0;
+        if (vector2 == null) {
+            throw new IllegalArgumentException("vector2 must be not null");
+        }
 
-        if (vector1.getSize() == vector2.getSize()) {
-            for (int i = 0; i < vector1.getSize(); i++) {
-                sum += vector1.elements[i] * vector2.elements[i];
-            }
-        } else if (vector1.getSize() > vector2.getSize()) {
-            double[] extendedArray = Arrays.copyOf(vector2.elements, vector1.getSize());
+        double result = 0;
 
-            for (int i = 0; i < vector1.getSize(); i++) {
-                sum += vector1.elements[i] * extendedArray[i];
-            }
-        } else {
-            double[] extendedArray = Arrays.copyOf(vector1.elements, vector2.getSize());
-
-            for (int i = 0; i < vector2.getSize(); i++) {
-                sum += vector2.elements[i] * extendedArray[i];
+        for (int i = 0; i < vector1.elements.length; i++) {
+            if (vector1.elements.length == vector2.elements.length) {
+                result += vector1.elements[i] * vector2.elements[i];
+            } else if (vector1.elements.length > vector2.elements.length) {
+                while (i < vector2.elements.length) {
+                    result += vector1.elements[i] * vector2.elements[i];
+                    i++;
+                }
+            } else {
+                result += vector1.elements[i] * vector2.elements[i];
             }
         }
 
-        return sum;
+        return result;
     }
 }
