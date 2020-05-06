@@ -29,44 +29,13 @@ public class RangeDemo {
         System.out.println();
 
         Range initialRange = new Range(2.0, 10.0);
-        Range firstRange = new Range(3.0, 10.0);
-        Range secondRange = new Range(4.0, 11.0);
-        Range thirdRange = new Range(1.0, 8.0);
-        Range fourthRange = new Range(1.0, 11.0);
-        Range fifthRange = new Range(11.0, 13.0);
+        Range range1 = new Range(3.0, 10.0);
+        Range range2 = new Range(11.0, 13.0);
+        Range range3 = new Range(1.0, 5.0);
 
-        Range[] ranges = {firstRange, secondRange, thirdRange, fourthRange, fifthRange};
+        Range[] ranges = {range1, range2, range3};
 
-        for (Range e : ranges) {
-            System.out.println("Для " + initialRange.toString() + " и " + e.toString() + ":");
-
-            if (initialRange.getIntersection(e) != null) {
-                System.out.println("- пересечение: " + initialRange.getIntersection(e).toString());
-            } else {
-                System.out.println("- нет пересечения");
-            }
-
-            if (initialRange.getUnion(e)[1] != null) {
-                System.out.println("- объединение: " + initialRange.getUnion(e)[0].toString() + ", " + initialRange.getUnion(e)[1].toString());
-            } else {
-                System.out.println("- объединение: " + initialRange.getUnion(e)[0].toString());
-            }
-
-            if (initialRange.getComplement(e) != null) {
-                if (initialRange.getComplement(e)[1] != null) {
-                    System.out.println("- разность: " + initialRange.getComplement(e)[0].toString() + ", " + initialRange.getComplement(e)[1].toString());
-                } else {
-                    System.out.println("- разность: " + initialRange.getComplement(e)[0].toString());
-                }
-            } else {
-                System.out.println("- нет разности");
-            }
-
-            System.out.println();
-        }
-
+        initialRange.printResults(ranges);
     }
 }
-
-
 

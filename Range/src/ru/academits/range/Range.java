@@ -1,5 +1,7 @@
 package ru.academits.range;
 
+import java.util.Arrays;
+
 public class Range {
     private double from;
     private double to;
@@ -11,7 +13,7 @@ public class Range {
 
     @Override
     public String toString() {
-        return "(" + this.from + ", " + this.to + ")";
+        return "(" + from + "; " + to + ")";
     }
 
     public double getFrom() {
@@ -38,76 +40,57 @@ public class Range {
         return number >= from && number <= to;
     }
 
-    public Range getIntersection(Range range) {
-        if (range.to < this.from || range.from > this.to) {
-            return null;
-        } else if (range.from < this.from && range.to > this.to) {
-            return this;
-        } else if (this.isInside(range.from) && this.isInside(range.to)) {
-            return range;
-        } else if (range.from < this.from && this.isInside(range.to)) {
-            return new Range(this.from, range.to);
-        } else {
-            return new Range(range.from, this.to);
+    public void printRanges(Range[] rangesArray) {
+        System.out.println(Arrays.toString(rangesArray));
+    }
+
+    public void printResults(Range[] ranges) {
+        for (Range e : ranges) {
+            System.out.println("For ranges " + this + " and " + e + ":");
+
+            if (this.getIntersection(e) != null) {
+                System.out.println("- intersection: " + this.getIntersection(e));
+            } else {
+                System.out.println("- no intersection");
+            }
+
+            System.out.print("- union: ");
+            this.printRanges(this.getUnion(e));
+
+            System.out.print("- difference: ");
+            this.printRanges(this.getDifference(e));
+
+            System.out.println();
         }
+    }
+
+    public Range getIntersection(Range range) {
+        if (range.to < from || range.from > to || to == range.from || from == range.to) {
+            return null;
+        }
+
+        return new Range(Math.max(from, range.from), Math.min(to, range.to));
     }
 
     public Range[] getUnion(Range range) {
-        Range[] unions = new Range[2];
-
-        if (this.getIntersection(range) == null) {
-            unions[0] = this;
-            unions[1] = range;
-            return unions;
-        } else if (this.isInside(range.from) && this.isInside(range.to)) {
-            unions[0] = this;
-            return unions;
-        } else if (range.isInside(this.from) && range.isInside(this.to)) {
-            unions[0] = range;
-            return unions;
-        } else if (range.from < this.from && this.isInside(range.to)) {
-            unions[0] = new Range(range.from, this.to);
-            return unions;
-        } else {
-            unions[0] = new Range(this.from, range.to);
-            return unions;
+        if (range.to < from || range.from > to) {
+            return new Range[]{new Range(from, to), new Range(range.from, range.to)};
         }
+
+        return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
     }
 
-    public Range[] getComplement(Range range) {
-        Range[] complement = new Range[2];
-
-        if (this.getIntersection(range) == null || (range.from < this.from && range.to > this.to)) {
-            return null;
-        } else if ((this.isInside(range.from) && range.from > this.from) && (this.isInside(range.to) && range.to < this.to)) {
-            complement[0] = new Range(this.from, range.from);
-            complement[1] = new Range(range.to, this.to);
-            return complement;
-        } else if (range.from <= this.from && this.isInside(range.to)) {
-            complement[0] = new Range(range.to, this.to);
-            return complement;
-        } else {
-            complement[0] = new Range(this.from, range.from);
-            return complement;
+    public Range[] getDifference(Range range) {
+        if (this.equals(range) || to == range.from || from == range.to || (range.from < from && range.to > to)) {
+            return new Range[]{};
+        } else if (this.getIntersection(range) == null) {
+            return new Range[]{new Range(from, to)};
+        } else if (from > range.from && to < range.to) {
+            return new Range[]{new Range(from, range.from), new Range(range.to, to)};
+        } else if (from < range.from && to >= range.to) {
+            return new Range[]{new Range(from, range.from)};
         }
+
+        return new Range[]{new Range(range.to, to)};
     }
 }
-
-//    Доработать класс ru.academits.range.Range (числовой диапазон).
-//        • Написать методы:
-//        • Получение интервала-пересечения двух интервалов.
-//        Если пересечения нет, выдать null. Если есть, то выдать
-//        новый диапазон с соответствующими концами
-//        • Получение объединения двух интервалов.
-//        Может получиться 1 или 2 отдельных куска
-//        • Получение разности двух интервалов.
-//        Может получиться 1 или 2 отдельных куска
-//        В операциях где может получиться 2 куска выдавайте
-//        массив объектов ru.academits.range.Range
-//        • Операции пересечения, объединения и разности – по
-//        смыслу такие же как для множеств, см. литературу по
-//        множествам
-//        • Разность нужна несимметричная – из первого интервала
-//        вычитаем второй
-
-
