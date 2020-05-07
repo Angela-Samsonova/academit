@@ -6,33 +6,33 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArrayListHome {
-    public static ArrayList<String> getLinesFromFile(String path) {
-        ArrayList<String> fileStringsList = new ArrayList<>();
-
+    public static ArrayList<String> getStringsFromFile(String path) {
         try (Scanner scanner = new Scanner(new FileInputStream(path))) {
+            ArrayList<String> fileStringsList = new ArrayList<>();
+
             while (scanner.hasNextLine()) {
                 fileStringsList.add(scanner.nextLine());
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        return fileStringsList;
+            return fileStringsList;
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException: " + e.getMessage());
+
+            return null;
+        }
     }
 
-    public static void removeEvenItems(ArrayList<Integer> list) {
+    public static void removeEvenNumbers(ArrayList<Integer> list) {
         if (list == null) {
             throw new IllegalArgumentException("list must be not null");
         }
 
-        int size = list.size();
-
-        for (int i = 0; i < size; i++) {
-            list.remove(list.get(i));
-            size--;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) % 2 == 0) {
+                list.remove(i);
+                i--;
+            }
         }
-
-        System.out.println("Список после удаления четных элементов = " + list + System.lineSeparator());
     }
 
     public static ArrayList<Integer> getUniqueItemsList(ArrayList<Integer> list) {
