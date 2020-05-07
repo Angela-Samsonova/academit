@@ -2,7 +2,6 @@ package array_list_home_main;
 
 import array_list_home.ArrayListHome;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
