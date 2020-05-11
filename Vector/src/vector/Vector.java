@@ -7,7 +7,7 @@ public class Vector {
 
     public Vector(int size) {
         if (size <= 0) {
-            throw new IllegalArgumentException("size must be > 0");
+            throw new IllegalArgumentException("the size " + size + "<= 0 - size must be > 0");
         }
 
         elements = new double[size];
@@ -23,7 +23,7 @@ public class Vector {
 
     public Vector(int size, double[] array) {
         if (size <= 0) {
-            throw new IllegalArgumentException("size must be > 0");
+            throw new IllegalArgumentException("the size " + size + "<= 0 - size must be > 0");
         }
 
         elements = new double[size];
@@ -74,21 +74,21 @@ public class Vector {
         return hash;
     }
 
+    public int getSize() {
+        return elements.length;
+    }
+
     public void add(Vector vector) {
         if (vector == null) {
             throw new IllegalArgumentException("vector must be not null");
         }
 
-        for (int i = 0; i < elements.length; i++) {
-            if (elements.length >= vector.elements.length) {
-                while (i < vector.elements.length) {
-                    elements[i] += vector.elements[i];
-                    i++;
-                }
-            } else {
-                elements = Arrays.copyOf(elements, vector.elements.length);
-                elements[i] += vector.elements[i];
-            }
+        if (elements.length < vector.elements.length) {
+            elements = Arrays.copyOf(elements, vector.elements.length);
+        }
+
+        for (int i = 0; i < vector.elements.length; i++) {
+            elements[i] += vector.elements[i];
         }
     }
 
@@ -97,16 +97,12 @@ public class Vector {
             throw new IllegalArgumentException("vector must be not null");
         }
 
-        for (int i = 0; i < elements.length; i++) {
-            if (elements.length >= vector.elements.length) {
-                while (i < vector.elements.length) {
-                    elements[i] -= vector.elements[i];
-                    i++;
-                }
-            } else {
-                elements = Arrays.copyOf(elements, vector.elements.length);
-                elements[i] -= vector.elements[i];
-            }
+        if (elements.length < vector.elements.length) {
+            elements = Arrays.copyOf(elements, vector.elements.length);
+        }
+
+        for (int i = 0; i < vector.elements.length; i++) {
+            elements[i] -= vector.elements[i];
         }
     }
 
@@ -170,18 +166,10 @@ public class Vector {
         }
 
         double result = 0;
+        int minElementsNumber = Math.min(vector1.elements.length, vector2.elements.length);
 
-        for (int i = 0; i < vector1.elements.length; i++) {
-            if (vector1.elements.length == vector2.elements.length) {
-                result += vector1.elements[i] * vector2.elements[i];
-            } else if (vector1.elements.length > vector2.elements.length) {
-                while (i < vector2.elements.length) {
-                    result += vector1.elements[i] * vector2.elements[i];
-                    i++;
-                }
-            } else {
-                result += vector1.elements[i] * vector2.elements[i];
-            }
+        for (int i = 0; i < minElementsNumber; i++) {
+            result += vector1.elements[i] * vector2.elements[i];
         }
 
         return result;
