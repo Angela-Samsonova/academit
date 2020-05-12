@@ -28,14 +28,31 @@ public class RangeDemo {
 
         System.out.println();
 
-        Range initialRange = new Range(2.0, 10.0);
-        Range range1 = new Range(3.0, 10.0);
+        Range initialRange = new Range(3.0, 5.0);
+        Range range1 = new Range(1.0, 3.0);
         Range range2 = new Range(11.0, 13.0);
         Range range3 = new Range(1.0, 5.0);
 
-        Range[] ranges = {range1, range2, range3};
+        printResults(initialRange, range1);
+        printResults(initialRange, range2);
+        printResults(initialRange, range3);
+    }
 
-        initialRange.printResults(ranges);
+    public static void printResults(Range range1, Range range2) {
+        System.out.println("For ranges " + range1 + " and " + range2 + ":");
+
+        if (range1.getIntersection(range2) != null) {
+            System.out.println("- intersection: " + range1.getIntersection(range2));
+        } else {
+            System.out.println("- no intersection");
+        }
+
+        System.out.print("- union: ");
+        Range.printRanges(range1.getUnion(range2));
+
+        System.out.print("- difference: ");
+        Range.printRanges(range1.getDifference(range2));
+
+        System.out.println();
     }
 }
-
