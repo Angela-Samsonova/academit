@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="List" />
+    <orderEntry type="module" module-name="Lambdas" />
   </component>
 </module>

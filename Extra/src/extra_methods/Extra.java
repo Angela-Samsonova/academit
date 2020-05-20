@@ -1,7 +1,10 @@
 package extra_methods;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+
 import  list.SinglyLinkedList;
+import person.Person;
 
 public class Extra {
     //даление дубликатов из ArrayList
@@ -79,5 +82,56 @@ public static void removeEvenNumbers(ArrayList<Integer> list) {
 
     System.out.println("Список после удаления четных чисел = " + list + System.lineSeparator());
 }
+
+    public static class personComparatorByAge implements Comparator<Person> {
+        @Override
+        public int compare(Person p1, Person p2) {
+            return p2.getAge() - p1.getAge();
+        }
+    }
+
+    // детерминант
+    //   public double determinant() {
+//        return determinant(m, matrixArray);
+    //   }
+
+//    private double determinant(int m, double[][] a) {
+    //       if (m > 2) {
+//            int temp = 0;
+//            for (int j = 0; j < m; j++) {
+//                double[][] b = getMinore(m, 0, j, a);
+//
+//                if (j % 2 == 0) {
+//                    temp += a[0][j] * determinant(m - 1, b);
+//                } else {
+//                    temp -= a[0][j] * determinant(m - 1, b);
+//                }
+//            }
+//            return temp;
+//        } else if (m == 2) {
+//            return a[0][0] * a[1][1] - a[0][1] * a[1][0];
+//        } else {
+//            return a[0][0];
+//        }
+    //   }
+
+
+    private double[][] getMinore(int m, int i, int j, double[][] a) {
+        double[][] b = new double[m - 1][m - 1];
+        int rowIndex = 0;
+        for (int t = 0; t < m; t++) {
+            if (t != i) {
+                int colomnIndex = 0;
+                for (int l = 0; l < m; l++) {
+                    if (l != j) {
+                        b[colomnIndex][rowIndex] = a[t][l];
+                        colomnIndex++;
+                    }
+                }
+                rowIndex++;
+            }
+        }
+        return b;
+    }
 
 }
