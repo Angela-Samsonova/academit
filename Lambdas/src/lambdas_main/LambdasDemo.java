@@ -24,9 +24,9 @@ public class LambdasDemo {
                 .collect(Collectors.toList());
 
         String uniqueNamesString = uniqueNamesList.stream()
-                .collect(Collectors.joining(", ", "", "."));
+                .collect(Collectors.joining(", ", "Имена: ", "."));
 
-        System.out.println("Имена: " + uniqueNamesString);
+        System.out.println(uniqueNamesString);
         System.out.println();
 
         List<Person> personsFilteredByAge = personsList.stream()
