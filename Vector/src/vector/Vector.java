@@ -31,6 +31,10 @@ public class Vector {
         System.arraycopy(array, 0, elements, 0, Math.min(array.length, size));
     }
 
+    public double[] getElements() {
+        return elements;
+    }
+
     public double getElement(int index) {
         return elements[index];
     }
@@ -166,9 +170,9 @@ public class Vector {
         }
 
         double result = 0;
-        int minElementsNumber = Math.min(vector1.elements.length, vector2.elements.length);
+        int minElementsCount = Math.min(vector1.elements.length, vector2.elements.length);
 
-        for (int i = 0; i < minElementsNumber; i++) {
+        for (int i = 0; i < minElementsCount; i++) {
             result += vector1.elements[i] * vector2.elements[i];
         }
 

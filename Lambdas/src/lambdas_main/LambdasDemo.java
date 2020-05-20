@@ -23,7 +23,8 @@ public class LambdasDemo {
                 .distinct()
                 .collect(Collectors.toList());
 
-        String uniqueNamesString = String.join(", ", uniqueNamesList);
+        String uniqueNamesString = uniqueNamesList.stream()
+                .collect(Collectors.joining(", ", "", "."));
 
         System.out.println("Имена: " + uniqueNamesString);
         System.out.println();
@@ -39,10 +40,10 @@ public class LambdasDemo {
         if (averageAge.isEmpty()) {
             System.out.println("Нет людей с таким возрастом");
         } else {
-            double averageAgeResult = averageAge.getAsDouble();
+            double personAverageAge = averageAge.getAsDouble();
 
             System.out.println("Люди с возрастом < 18: " + personsFilteredByAge);
-            System.out.println("Средний возраст: " + averageAgeResult);
+            System.out.println("Средний возраст: " + personAverageAge);
             System.out.println();
         }
 
