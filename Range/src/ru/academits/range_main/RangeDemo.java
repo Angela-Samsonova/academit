@@ -28,8 +28,8 @@ public class RangeDemo {
 
         System.out.println();
 
-        Range initialRange = new Range(3.0, 5.0);
-        Range range1 = new Range(1.0, 3.0);
+        Range initialRange = new Range(3.0, 7.0);
+        Range range1 = new Range(5.0, 7.0);
         Range range2 = new Range(11.0, 13.0);
         Range range3 = new Range(1.0, 5.0);
 
