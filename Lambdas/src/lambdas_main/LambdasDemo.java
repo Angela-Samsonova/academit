@@ -40,10 +40,10 @@ public class LambdasDemo {
         if (averageAge.isEmpty()) {
             System.out.println("Нет людей с таким возрастом");
         } else {
-            double personAverageAge = averageAge.getAsDouble();
+            double personsAverageAge = averageAge.getAsDouble();
 
             System.out.println("Люди с возрастом < 18: " + personsFilteredByAge);
-            System.out.println("Средний возраст: " + personAverageAge);
+            System.out.println("Средний возраст: " + personsAverageAge);
             System.out.println();
         }
 

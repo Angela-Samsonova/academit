@@ -134,4 +134,13 @@ public static void removeEvenNumbers(ArrayList<Integer> list) {
         return b;
     }
 
+ //удаление первого вхождения списка
+//        if (indexOf(o) != items.length - 1) {
+//            int i = indexOf(o);
+//            System.arraycopy(items, i + 1, items, i, size - (i + 1));
+//        }
+
+//        --size;
+//        ++modCount;
+
 }
