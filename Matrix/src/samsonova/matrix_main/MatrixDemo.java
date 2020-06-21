@@ -1,6 +1,6 @@
-package matrix_main;
+package samsonova.matrix_main;
 
-import matrix.Matrix;
+import samsonova.matrix.Matrix;
 import vector.Vector;
 
 public class MatrixDemo {
@@ -9,7 +9,7 @@ public class MatrixDemo {
         System.out.println("matrix1 = " + matrix1.toString());
 
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
-        matrix1.setMatrixRow(0, vector);
+        matrix1.setRow(0, vector);
         System.out.println("matrix1 = " + matrix1.toString());
 
         double[][] matrixArray1 = new double[][]{
@@ -24,6 +24,7 @@ public class MatrixDemo {
                 {8, 9}};
 
         Matrix matrix11 = new Matrix(matrixArray2);
+        System.out.println("matrix11 = " + matrix11.toString());
 
         Matrix matrix2 = new Matrix(matrixArray1);
         System.out.println("matrix2 = " + matrix2.toString());
@@ -39,12 +40,12 @@ public class MatrixDemo {
         Matrix matrix4 = new Matrix(vector1);
         System.out.println("matrix4 = " + matrix4.toString());
 
-        System.out.println("matrix4.getColumnVector(1) = " + matrix4.getColumnByIndex(1).toString());
+        System.out.println("matrix4.getColumnVector(1) = " + matrix4.getColumn(1).toString());
 
         Matrix matrix5 = new Matrix(vector1);
-        Matrix matrix55 = matrix5.transpose();
         System.out.println("matrix5 =  " + matrix5.toString());
-        System.out.println("matrix55 = matrix5.transpose() = " + matrix55.toString());
+        matrix5.transpose();
+        System.out.println("matrix5 after transpose = " + matrix5.toString());
 
         Matrix matrix6 = new Matrix(matrix4);
         matrix6.multiplyByScalar(2);
@@ -74,19 +75,21 @@ public class MatrixDemo {
 
         Matrix matrix10 = new Matrix(vector3);
 
-        Matrix m11 = Matrix.addMatrix(matrix9, matrix10);
-        System.out.println("m11 = addMatrix(matrix9, matrix10) = " + m11.toString());
+        Matrix m11 = Matrix.getSum(matrix9, matrix10);
+        System.out.println("m11 = getSum(matrix9, matrix10) = " + m11.toString());
 
         System.out.println(matrix9.toString());
         System.out.println(matrix10.toString());
 
-        Matrix m12 = Matrix.subtractMatrix(matrix9, matrix10);
-        System.out.println("m12 = subtractMatrix(matrix9, matrix10) = " + m12.toString());
+        Matrix m12 = Matrix.getDifference(matrix9, matrix10);
+        System.out.println("m12 = getDifference(matrix9, matrix10) = " + m12.toString());
 
-        Matrix m13 = Matrix.multiplyMatrix(matrix2, matrix11);
-        System.out.println("m13 = multiplyMatrix(matrix2, matrix11) = " + m13.toString());
+        Matrix m13 = Matrix.getProduct(matrix2, matrix11);
+        System.out.println("m13 = getProduct(matrix2, matrix11) = " + m13.toString());
 
-        Vector vector5 = m13.multiplyByVector(matrix1.getMatrixRow(0));
+        Vector vector5 = m13.multiplyByVector(matrix1.getRow(0));
         System.out.println("vector5 = m13.multiplyByVector(matrix1.getMatrixRow(0) = " + vector5);
+
+        System.out.println("m11.getDeterminant() = " + m11.getDeterminant());
     }
 }
