@@ -90,49 +90,7 @@ public static void removeEvenNumbers(ArrayList<Integer> list) {
         }
     }
 
-    // детерминант
-    //   public double determinant() {
-//        return determinant(m, matrixArray);
-    //   }
 
-//    private double determinant(int m, double[][] a) {
-    //       if (m > 2) {
-//            int temp = 0;
-//            for (int j = 0; j < m; j++) {
-//                double[][] b = getMinore(m, 0, j, a);
-//
-//                if (j % 2 == 0) {
-//                    temp += a[0][j] * determinant(m - 1, b);
-//                } else {
-//                    temp -= a[0][j] * determinant(m - 1, b);
-//                }
-//            }
-//            return temp;
-//        } else if (m == 2) {
-//            return a[0][0] * a[1][1] - a[0][1] * a[1][0];
-//        } else {
-//            return a[0][0];
-//        }
-    //   }
-
-
-    private double[][] getMinore(int m, int i, int j, double[][] a) {
-        double[][] b = new double[m - 1][m - 1];
-        int rowIndex = 0;
-        for (int t = 0; t < m; t++) {
-            if (t != i) {
-                int colomnIndex = 0;
-                for (int l = 0; l < m; l++) {
-                    if (l != j) {
-                        b[colomnIndex][rowIndex] = a[t][l];
-                        colomnIndex++;
-                    }
-                }
-                rowIndex++;
-            }
-        }
-        return b;
-    }
 
  //удаление первого вхождения списка
 //        if (indexOf(o) != items.length - 1) {
