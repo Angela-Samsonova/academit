@@ -26,8 +26,8 @@ public class Matrix {
     }
 
     public Matrix(double[][] matrixArray) {
-        if (matrixArray.length == 0) {
-            throw new IllegalArgumentException("Array size must be not null");
+        if (matrixArray.length == 0 || matrixArray[0].length == 0) {
+            throw new IllegalArgumentException("Array size must be not 0");
         }
 
         int maxVectorSize = 0;
@@ -136,13 +136,13 @@ public class Matrix {
 
     //транспонирование
     public void transpose() {
-        Vector[] transposedMatrix = new Vector[getColumnsCount()];
+        Vector[] transposedMatrixRows = new Vector[getColumnsCount()];
 
         for (int i = 0; i < getColumnsCount(); i++) {
-            transposedMatrix[i] = getColumn(i);
+            transposedMatrixRows[i] = getColumn(i);
         }
 
-        rows = transposedMatrix;
+        rows = transposedMatrixRows;
     }
 
     //умножение на скаляр
