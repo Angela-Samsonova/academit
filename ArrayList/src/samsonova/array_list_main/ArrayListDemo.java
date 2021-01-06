@@ -11,6 +11,7 @@ public class ArrayListDemo {
     public static void main(String[] args) {
         String[] strings1 = new String[]{"one", "two", "three", "four", "two"};
         String[] strings2 = new String[]{"one", "two", "three", "four", null, null};
+        Integer[] integers = new Integer[]{1, 2, 3};
         List<String> list = Arrays.asList(strings1);
 
         MyArrayList<String> stringsList1 = new MyArrayList<>(strings1);
@@ -20,6 +21,7 @@ public class ArrayListDemo {
         MyArrayList<String> stringsList5 = new MyArrayList<>(5);
         MyArrayList<String> stringsList6 = new MyArrayList<>(strings2);
         MyArrayList<String> stringsList7 = new MyArrayList<>(list);
+        MyArrayList<Integer> integersList8 = new MyArrayList<>(integers);
 
         System.out.println("stringsList1 = " + stringsList1);
         System.out.println("index of \"two\" in stringsList1 = " + stringsList1.indexOf("two"));
@@ -35,8 +37,8 @@ public class ArrayListDemo {
         System.out.println("stringsList2.remove(\"two\") = " + stringsList2);
         stringsList2.trimToSize();
         System.out.println("stringsList2.trimToSize() = " + stringsList2);
-        stringsList2.addAll(stringsList1);
-        System.out.println("stringsList2.addAll(stringsList1) = " + stringsList2);
+        stringsList2.addAll(5, stringsList1);
+        System.out.println("stringsList2.addAll(5, stringsList1) = " + stringsList2);
         stringsList2.retainAll(stringsList1);
         System.out.println("stringsList2.retainAll(stringsList1) = " + stringsList2);
         stringsList2.trimToSize();
@@ -63,6 +65,8 @@ public class ArrayListDemo {
         System.out.println("stringsList3.isEmpty() = " + stringsList3.isEmpty());
         stringsList3.addAll(0, stringsList4);
         System.out.println("stringsList3 = stringsList3.addAll(0, stringsList4) = " + stringsList3);
+        stringsList3.addAll(stringsList4);
+        System.out.println("stringsList3 = stringsList3.addAll(stringsList4) = " + stringsList3);
 
         System.out.println("stringsList4 = " + stringsList4);
 
@@ -71,8 +75,6 @@ public class ArrayListDemo {
         System.out.println("stringsList5.add(\"two\") = " + stringsList5);
         System.out.println("stringsList5.containsAll(stringsList1) = " + stringsList5.containsAll(stringsList1));
         System.out.println("stringsList1.containsAll(stringsList5) = " + stringsList1.containsAll(stringsList5));
-        stringsList5.trimToSize();
-        System.out.println("stringsList5.trimToSize() = " + stringsList5);
         stringsList5.add("four");
         System.out.println("stringsList5.add(\"four\") = " + stringsList5);
         stringsList5.add("one");
@@ -80,6 +82,7 @@ public class ArrayListDemo {
         System.out.println("stringsList5.contains(\"one\") = " + stringsList5.contains("one"));
         stringsList5.remove("four");
         System.out.println("stringsList5.remove(\"four\") = " + stringsList5);
+        System.out.println(stringsList5.toString());
         stringsList5.trimToSize();
         System.out.println("stringsList5.trimToSize() = " + stringsList5);
 
@@ -91,12 +94,17 @@ public class ArrayListDemo {
         System.out.println("stringsList5.add(\"four\") = " + stringsList5);
 
         System.out.println("stringsList6 = " + stringsList6);
+        System.out.println("stringsList6 size = " + stringsList6.size());
         System.out.println("stringsList6.addAll(4, stringsList2) = " + stringsList6.addAll(4, stringsList2));
         System.out.println("stringsList6 = " + stringsList6);
         System.out.println("stringsList6.addAll(4, stringsList3) = " + stringsList6.addAll(4, stringsList3));
         System.out.println("stringsList6 = " + stringsList6);
 
-        System.out.println("stringsLis7 = " + stringsList7);
+        stringsList7.remove(4);
+        System.out.println("stringsList7 = " + stringsList7);
+        System.out.println("stringsList7.toString() = " + stringsList7.toString());
+        integersList8.toArray(new Integer[]{7, 8, 9, 10, 11});
+        System.out.println("integersList8.toArray(new Integer[]{7, 8, 9, 10, 11}) = " + integersList8);
 
         //noinspection ForLoopReplaceableByForEach
         for (Iterator<String> i = stringsList5.iterator(); i.hasNext(); ) {
